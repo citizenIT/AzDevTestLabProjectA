@@ -88,43 +88,30 @@
           "addressPrefixes": [
             "[parameters('vnetAddressPrefix')]"
           ]
-        }
-      },
-      "resources": [
-        {
-          "type": "subnets",
-          "apiVersion": "2020-05-01",
-          "location": "[variables('location')]",
-          "name": "[parameters('subnet1Name')]",
-          "dependsOn": [
-            "[parameters('vnetName')]"
-          ],
-          "properties": {
-            "networkSecurityGroup": {
-              "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsg1Name'))]",
-              "location": "[variables('location')]"
-            },
-            "addressPrefix": "[parameters('subnet1Prefix')]"
-          }
         },
-        {
-          "type": "subnets",
-          "apiVersion": "2020-05-01",
-          "location": "[variables('location')]",
-          "name": "[parameters('subnet2Name')]",
-          "dependsOn": [
-            "[parameters('vnetName')]",
-            "[parameters('subnet1Name')]"
-          ],
-          "properties": {
-            "networkSecurityGroup": {
-              "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsg1Name'))]",
-              "location": "[variables('location')]"
-            },
-            "addressPrefix": "[parameters('subnet2Prefix')]"
+        "subnets": [
+          {
+            "name": "[parameters('subnet1Name')]",
+            "properties": {
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsg1Name'))]",
+                "location": "[variables('location')]"
+              },
+              "addressPrefix": "[parameters('subnet1Prefix')]"
+            }
+          },
+          {
+            "name": "[parameters('subnet2Name')]",
+            "properties": {
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsg1Name'))]",
+                "location": "[variables('location')]"
+              },
+              "addressPrefix": "[parameters('subnet2Prefix')]"
+            }
           }
-        }
-      ]
+        ]
+      }
     }
   ]
 }
